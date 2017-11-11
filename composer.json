@@ -1,0 +1,38 @@
+{
+  "name": "you-up/incoming-webhook-analyzer",
+  "description": "Help YouUp process incoming webhook",
+  "homepage": "https://github.com/you-up/incoming-webhook-analyzer",
+  "keywords": [
+    "you-up", "youup", "pager", "alerts", "monitoring"
+  ],
+  "license": "MIT",
+  "type": "library",
+  "require": {
+    "laravel/framework": "5.5.*",
+    "php": ">=7.0.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "~6.0"
+  },
+  "autoload": {
+    "classmap": [],
+    "psr-4": {
+      "WebhookParser\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "dont-discover": []
+    }
+  },
+  "config": {
+    "preferred-install": "dist",
+    "sort-packages": true,
+    "optimize-autoloader": true
+  }
+}
