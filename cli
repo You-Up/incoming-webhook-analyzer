@@ -1,0 +1,16 @@
+#!/usr/bin/env php
+<?php
+
+require __DIR__.'/vendor/autoload.php';
+
+// quick and easy import for now
+require_once 'tools/ScaffoldCommand.php';
+
+use Symfony\Component\Console\Application;
+
+$application = new Application();
+$application->add(new \Webhook\Cli\Command\ScaffoldCommand());
+
+// ... register commands
+
+$application->run();
