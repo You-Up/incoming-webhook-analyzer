@@ -12,7 +12,7 @@
     "SERVER_PROTOCOL": "HTTP\/1.1",
     "SERVER_NAME": "127.0.0.1",
     "SERVER_PORT": "8000",
-    "REQUEST_URI": "\/api\/webhook\/1\/save?service=idSomething",
+    "REQUEST_URI": "\/api\/webhook\/1\/token",
     "REQUEST_METHOD": "POST",
     "PATH_INFO": "\/api\/webhook\/1\/save",
     "PHP_SELF": "\/index.php\/api\/webhook\/1\/save",
