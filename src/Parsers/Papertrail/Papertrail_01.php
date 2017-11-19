@@ -4,7 +4,7 @@
  * @see https://help.papertrailapp.com/kb/how-it-works/web-hooks
  * @author Thomas Genin
  */
-namespace WebhookParser\Providers\Papertrail;
+namespace WebhookParser\Parsers\Papertrail;
 
 use WebhookParser\WebhookIncident;
 use WebhookParser\Provider;
@@ -26,9 +26,6 @@ class Papertrail_01 extends Provider
     public function extract()
     {
         $incident = new WebhookIncident();
-        if ($this->request->has('service')) {
-            $incident->setService($this->request->get('service'));
-        }
 
         // Take only 1 example of an event, as they all match the papertrail query
         $event = $this->payload['events'][0];
@@ -36,10 +33,6 @@ class Papertrail_01 extends Provider
 
         $message = $this->payload['saved_search']['name'];
         $incident->setTitle("papertrail alert triggered \"{$message}\"");
-
-        if ($this->request->has('service')) {
-            $incident->setService($this->request->get('service'));
-        }
 
         return $incident;
     }

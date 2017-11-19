@@ -5,9 +5,12 @@ namespace WebhookParser;
 use Illuminate\Http\Request;
 
 class Main {
+    /**
+     * @param \Illuminate\Http\Request $request
+     * @return null|\WebhookParser\WebhookIncident
+     */
     static function run(Request $request) {
-        $providerRootDir = __DIR__ . '/providers';
-        $parserProviders = new ParserProvider($providerRootDir, true);
+        $parserProviders = new ParserProvider(true);
         foreach ($parserProviders->getClassList() as $providerClass) {
             /** @var \WebhookParser\Provider $cls */
             $cls = new $providerClass($request);

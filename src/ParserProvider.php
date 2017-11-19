@@ -7,21 +7,21 @@ class ParserProvider {
     private $rootPath = "";
     private $useFileSystem = false;
 
-    public function __construct($path, $useFileSystem)
+    public function __construct($useFileSystem)
     {
-        $this->rootPath      = $path;
+        $this->rootPath      = __DIR__ . DIRECTORY_SEPARATOR . "Parsers";
         $this->useFileSystem = $useFileSystem;
     }
 
     public function getClassList() {
         $list = [];
-        $this->traverseFiles(function($classWithNamespace) use (&$list) {
+        $this->forEachParser(function($classWithNamespace) use (&$list) {
             $list[] = $classWithNamespace;
         });
         return $list;
     }
 
-    private function traverseFiles(callable $executor){
+    public function forEachParser(callable $executor){
         foreach (new \DirectoryIterator($this->rootPath) as $rootItem) {
             if ($rootItem->isDot() ) {
                 continue;
@@ -31,16 +31,21 @@ class ParserProvider {
                 print "Error " . $rootItem->getPathname() . " is not a directory" . PHP_EOL;
                 continue;
             }
-            $providerName = $rootItem->getBasename();
+            $companyName = $rootItem->getBasename();
 
-            $providerDir = $this->rootPath . DIRECTORY_SEPARATOR .  $providerName;
-            foreach (new \DirectoryIterator($providerDir) as $provider) {
-                if ($rootItem->isDot() || $provider->getExtension() !== 'php') {
+            $providerDir = $this->rootPath . DIRECTORY_SEPARATOR .  $companyName;
+            foreach (new \DirectoryIterator($providerDir) as $parser) {
+                if ($rootItem->isDot() || $parser->getExtension() !== 'php') {
                     continue;
                 }
-                $className = $provider->getBasename('.' . $provider->getExtension());
-                $classWithNamespace = "WebhookParser\Providers\\$providerName\\$className";
-                call_user_func($executor, $classWithNamespace);
+                $parserName = $parser->getBasename('.php');
+                $namespacedCls = "WebhookParser\Parsers\\$companyName\\$parserName";
+
+                call_user_func($executor,
+                    $namespacedCls,
+                    $parser,
+                    $companyName,
+                    $parserName);
             }
         }
     }

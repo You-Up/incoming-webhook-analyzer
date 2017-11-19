@@ -3,7 +3,7 @@
  * @date @@date
  * @see LINK_TO_DOCS
  */
-namespace WebhookParser\Providers\@@companyName;
+namespace WebhookParser\Parsers\@@companyName;
 
 use WebhookParser\WebhookIncident;
 use WebhookParser\Provider;
