@@ -6,7 +6,7 @@
  */
 namespace WebhookParser\Providers\Papertrail;
 
-use WebhookParser\Incident;
+use WebhookParser\WebhookIncident;
 use WebhookParser\Provider;
 
 class Papertrail_01 extends Provider
@@ -25,7 +25,7 @@ class Papertrail_01 extends Provider
 
     public function extract()
     {
-        $incident = new Incident();
+        $incident = new WebhookIncident();
         if ($this->request->has('service')) {
             $incident->setService($this->request->get('service'));
         }

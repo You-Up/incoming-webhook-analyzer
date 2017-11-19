@@ -2,16 +2,11 @@
 
 namespace WebhookParser;
 
-class Incident implements \JsonSerializable{
+class WebhookIncident implements \JsonSerializable{
     /**
      * @var null|\DateTime
      */
     private $createdAt = null;
-
-    /**
-     * @var null|string
-     */
-    private $service = null;
 
     /**
      * @var null|string
@@ -28,23 +23,7 @@ class Incident implements \JsonSerializable{
     }
 
     /**
-     * @return null|string
-     */
-    public function service()
-    {
-        return $this->service;
-    }
-
-    /**
-     * @param null|string $service
-     */
-    public function setService($service)
-    {
-        $this->service = $service;
-    }
-
-    /**
-     * @return mixed
+     * @return string
      */
     public function title()
     {
@@ -52,7 +31,7 @@ class Incident implements \JsonSerializable{
     }
 
     /**
-     * @param mixed $title
+     * @param string $title
      */
     public function setTitle( $title )
     {
@@ -60,7 +39,8 @@ class Incident implements \JsonSerializable{
     }
 
 
-    public function isValid() {
+    public function isValid()
+    {
         return  $this->title !== null &&
                 $this->createdAt !== null
             ;
@@ -69,8 +49,7 @@ class Incident implements \JsonSerializable{
     public function jsonSerialize()
     {
         return [
-            'serviceId' => $this->service,
-            'createdAt' => $this->createdAt->format('c'),
+            'createdAt' => $this->createdAt->format('Y-m-d H:i:s'),
             'title' => $this->title,
         ];
     }
