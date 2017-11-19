@@ -12,11 +12,13 @@ class Main {
     static function run(Request $request) {
         $parserProviders = new ParserProvider(true);
         foreach ($parserProviders->getClassList() as $providerClass) {
-            /** @var \WebhookParser\Provider $cls */
+            /** @var \WebhookParser\Parser $cls */
             $cls = new $providerClass($request);
 
             if ($cls->isMatch()) {
-                return $cls->extract();
+                $incident = $cls->extract();
+                $incident->setParser($cls->companyName(), $cls->version());
+                return $incident;
             }
         }
         return null;
