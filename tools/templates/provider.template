@@ -6,9 +6,9 @@
 namespace WebhookParser\Parsers\@@companyName;
 
 use WebhookParser\WebhookIncident;
-use WebhookParser\Provider;
+use WebhookParser\Parser;
 
-class @@companyName_@@nameIncrement extends Provider
+class @@companyName_@@nameIncrement extends Parser
 {
     /**
      * Detect if an incoming webhook should be process by this class

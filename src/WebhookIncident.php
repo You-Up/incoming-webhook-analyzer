@@ -13,6 +13,9 @@ class WebhookIncident implements \JsonSerializable{
      */
     private $title = null;
 
+    private $parserVersion = null;
+    private $parserType = null;
+
     public function createdAt() {
         return $this->createdAt;
     }
@@ -20,6 +23,11 @@ class WebhookIncident implements \JsonSerializable{
     public function setCreatedAt(\DateTime $time) {
         $this->createdAt = $time;
         $this->createdAt->setTimeZone(new \DateTimeZone('UTC'));
+    }
+
+    public function setParser($company, $version) {
+        $this->parserType = $company;
+        $this->parserVersion = $version;
     }
 
     /**
@@ -51,6 +59,8 @@ class WebhookIncident implements \JsonSerializable{
         return [
             'createdAt' => $this->createdAt->format('Y-m-d H:i:s'),
             'title' => $this->title,
+            'parserType' => $this->parserType,
+            'parserVersion' => $this->parserVersion,
         ];
     }
 }

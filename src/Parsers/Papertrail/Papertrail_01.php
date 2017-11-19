@@ -7,9 +7,9 @@
 namespace WebhookParser\Parsers\Papertrail;
 
 use WebhookParser\WebhookIncident;
-use WebhookParser\Provider;
+use WebhookParser\Parser;
 
-class Papertrail_01 extends Provider
+class Papertrail_01 extends Parser
 {
     private $payload = null;
 
