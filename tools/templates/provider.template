@@ -1,0 +1,34 @@
+<?php
+/**
+ * @date @@date
+ * @see LINK_TO_DOCS
+ */
+namespace WebhookParser\Providers\@@companyName;
+
+use WebhookParser\WebhookIncident;
+use WebhookParser\Provider;
+
+class @@companyName_@@nameIncrement extends Provider
+{
+    /**
+     * Detect if an incoming webhook should be process by this class
+     *
+     * @return bool
+     */
+    public function isMatch()
+    {
+        return false;
+    }
+
+    /**
+     * Extract and format the information from the request into a WebhookIncident
+     *
+     * @return \WebhookParser\WebhookIncident
+     */
+    public function extract()
+    {
+        $incident = new WebhookIncident();
+
+        return $incident;
+    }
+}
