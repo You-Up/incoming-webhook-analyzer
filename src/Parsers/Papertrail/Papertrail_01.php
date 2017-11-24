@@ -19,7 +19,7 @@ class Papertrail_01 extends Parser
             return false;
         }
 
-        $this->payload = json_decode( $this->request->input( 'payload' ), true );
+        $this->payload = json_decode( $this->request->post( 'payload' ), true );
 
         $needle = 'https://papertrailapp.com/searches/2';
         return array_key_exists('saved_search', $this->payload) &&
