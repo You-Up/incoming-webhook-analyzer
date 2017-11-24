@@ -19,6 +19,9 @@ class WebhookIncident implements \JsonSerializable{
     /** @var string */
     private $parserType = null;
 
+    /** @var string */
+    private $link = null;
+
     /**
      * @return \DateTime|null
      */
@@ -66,6 +69,14 @@ class WebhookIncident implements \JsonSerializable{
         $this->title = $title;
     }
 
+    public function link() {
+        return $this->link;
+    }
+
+    public function setLink($value) {
+        $this->link = $value;
+    }
+
 
     /**
      * @return bool
@@ -84,6 +95,7 @@ class WebhookIncident implements \JsonSerializable{
             'title' => $this->title,
             'parserType' => $this->parserType,
             'parserVersion' => $this->parserVersion,
+            'link' => $this->link
         ];
     }
 }

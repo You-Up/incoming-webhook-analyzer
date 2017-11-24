@@ -38,6 +38,8 @@ class Papertrail_01 extends Parser
         $message = $this->payload['saved_search']['name'];
         $incident->setTitle("papertrail alert triggered \"{$message}\"");
 
+        $incident->setLink($this->payload['saved_search']['html_search_url']);
+
         return $incident;
     }
 }

@@ -114,9 +114,10 @@ class ScaffoldCommand extends Command
             "{$companyName}_{$nameIncrement}_parsed_results.json"
         ]), json_encode([
             "createdAt" => "",
-            "summary" => "",
+            "title" => "",
             "parserType" => $companyName,
             "parserVersion" => $nameIncrement,
+            "link" => null,
         ], JSON_PRETTY_PRINT));
     }
 
