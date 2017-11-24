@@ -10,7 +10,7 @@ use Symfony\Component\Console\Question\Question;
 
 class ScaffoldCommand extends Command
 {
-    const ROOT_PROVIDER_PATH = "src/Providers";
+    const ROOT_PROVIDER_PATH = "src/Parsers";
 
     /**
      * @var \Symfony\Component\Console\Style\SymfonyStyle
@@ -114,9 +114,10 @@ class ScaffoldCommand extends Command
             "{$companyName}_{$nameIncrement}_parsed_results.json"
         ]), json_encode([
             "createdAt" => "",
-            "summary" => "",
+            "title" => "",
             "parserType" => $companyName,
             "parserVersion" => $nameIncrement,
+            "link" => null,
         ], JSON_PRETTY_PRINT));
     }
 
