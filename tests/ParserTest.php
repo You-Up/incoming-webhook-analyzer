@@ -28,6 +28,8 @@ class ParserTest extends TestCase
             );
 
             $parsedIncident = WebhookParser\Main::run($fakeRequest);
+            $this->assertInstanceOf(\WebhookParser\WebhookIncident::class, $parsedIncident);
+
             $jsonIncident = $parsedIncident->jsonSerialize();
 
             $jsonIncidentKeys = array_keys($jsonIncident);

@@ -10,7 +10,7 @@ use Symfony\Component\Console\Question\Question;
 
 class ScaffoldCommand extends Command
 {
-    const ROOT_PROVIDER_PATH = "src/Providers";
+    const ROOT_PROVIDER_PATH = "src/Parsers";
 
     /**
      * @var \Symfony\Component\Console\Style\SymfonyStyle
