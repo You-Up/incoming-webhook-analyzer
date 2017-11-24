@@ -48,4 +48,11 @@ class ParserTest extends TestCase
             }
         });
     }
+
+    public function testEmpty() {
+        $fakeRequest = new \Illuminate\Http\Request();
+
+        $parsedIncident = WebhookParser\Main::run($fakeRequest);
+        $this->assertNull($parsedIncident);
+    }
 }
