@@ -15,6 +15,10 @@ class Papertrail_01 extends Parser
 
     public function isMatch()
     {
+        if (!$this->request->has('payload')) {
+            return false;
+        }
+
         $this->payload = json_decode( $this->request->input( 'payload' ), true );
 
         $needle = 'https://papertrailapp.com/searches/2';
