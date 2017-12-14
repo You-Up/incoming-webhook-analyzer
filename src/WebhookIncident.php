@@ -11,7 +11,7 @@ class WebhookIncident implements \JsonSerializable{
     /**
      * @var null|string
      */
-    private $title = null;
+    private $summary = null;
 
     /** @var string */
     private $parserVersion = null;
@@ -58,15 +58,15 @@ class WebhookIncident implements \JsonSerializable{
      */
     public function title()
     {
-        return $this->title;
+        return $this->summary;
     }
 
     /**
-     * @param string $title
+     * @param string $summary
      */
-    public function setTitle( $title )
+    public function setSummary( $summary )
     {
-        $this->title = $title;
+        $this->summary = $summary;
     }
 
     public function link() {
@@ -83,7 +83,7 @@ class WebhookIncident implements \JsonSerializable{
      */
     public function isValid()
     {
-        return  $this->title !== null &&
+        return  $this->summary !== null &&
                 $this->createdAt !== null
             ;
     }
@@ -92,7 +92,7 @@ class WebhookIncident implements \JsonSerializable{
     {
         return [
             'createdAt' => $this->createdAt->format('Y-m-d H:i:s'),
-            'title' => $this->title,
+            'summary' => $this->summary,
             'parserType' => $this->parserType,
             'parserVersion' => $this->parserVersion,
             'link' => $this->link

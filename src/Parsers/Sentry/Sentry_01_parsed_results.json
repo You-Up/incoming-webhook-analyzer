@@ -1,6 +1,6 @@
 {
     "createdAt": "2017-11-23 18:50:53",
-    "title": "This is an example Python exception",
+    "summary": "This is an example Python exception",
     "parserType": "Sentry",
     "parserVersion": "01",
     "link": "https://sentry.io/thomas-genin/youup-dev/issues/409210467/"
