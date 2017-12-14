@@ -1,6 +1,6 @@
 {
   "createdAt": "2017-11-10 16:11:11",
-  "title": "papertrail alert triggered \"production.ALERT\"",
+  "summary": "papertrail alert triggered \"production.ALERT\"",
   "parserType": "Papertrail",
   "parserVersion": "01",
   "link": "https://papertrailapp.com/searches/28907952"

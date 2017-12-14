@@ -18,7 +18,6 @@ class Papertrail_01 extends Parser
         if (!$this->request->has('payload')) {
             return false;
         }
-
         $this->payload = json_decode( $this->request->post( 'payload' ), true );
 
         $needle = 'https://papertrailapp.com/searches/2';
@@ -36,7 +35,7 @@ class Papertrail_01 extends Parser
         $incident->setCreatedAt(new \DateTime($event['received_at']));
 
         $message = $this->payload['saved_search']['name'];
-        $incident->setTitle("papertrail alert triggered \"{$message}\"");
+        $incident->setSummary("papertrail alert triggered \"{$message}\"");
 
         $incident->setLink($this->payload['saved_search']['html_search_url']);
 
