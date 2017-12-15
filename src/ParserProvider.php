@@ -21,7 +21,7 @@ class ParserProvider {
         return $list;
     }
 
-    public function forEachParser(callable $executor){
+    public function forEachParserProvider(callable $callback) {
         foreach (new \DirectoryIterator($this->rootPath) as $rootItem) {
             if ($rootItem->isDot() ) {
                 continue;
@@ -32,10 +32,15 @@ class ParserProvider {
                 continue;
             }
             $companyName = $rootItem->getBasename();
-
             $providerDir = $this->rootPath . DIRECTORY_SEPARATOR .  $companyName;
+            $callback($companyName, $providerDir);
+        }
+    }
+
+    public function forEachParser(callable $executor){
+        $this->forEachParserProvider(function($companyName, $providerDir) use ($executor) {
             foreach (new \DirectoryIterator($providerDir) as $parser) {
-                if ($rootItem->isDot() || $parser->getExtension() !== 'php') {
+                if ($parser->isDot() || $parser->getExtension() !== 'php') {
                     continue;
                 }
                 $parserName = $parser->getBasename('.php');
@@ -47,6 +52,6 @@ class ParserProvider {
                     $companyName,
                     $parserName);
             }
-        }
+        });
     }
 }
