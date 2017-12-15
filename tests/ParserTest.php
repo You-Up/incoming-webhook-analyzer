@@ -59,7 +59,6 @@ class ParserTest extends TestCase
                 foreach ($jsonIncidentKeys as $key) {
                     $this->assertEquals($testResults[$key], $jsonIncident[$key]);
                 }
-
             }
         });
     }
