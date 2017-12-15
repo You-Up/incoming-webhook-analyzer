@@ -42,11 +42,14 @@ class ScaffoldCommand extends Command
             mkdir($path);
         }
 
-        $nameIncrement = $this->detectFileCount($path);
+        $this->createProviderTemplate($path, $companyName);
 
-        $this->createProviderTemplate($companyName, $nameIncrement);
-        $this->createParsedResultTemplate($companyName, $nameIncrement);
-        $this->createRequestTemplate($companyName, $nameIncrement);
+        $testDir = $this->createTestDir($path);
+        $nameIncrement = count(scandir($testDir)) / 2;
+        $nameIncrement = $nameIncrement < 10 ? "0".$nameIncrement : $nameIncrement;
+
+        $this->createParsedResultTemplate($testDir, $companyName, $nameIncrement);
+        $this->createRequestTemplate($testDir, $nameIncrement);
 
         $this->io->newLine();
         $this->io->text("Command finished with success. Please Read the Readme to know what to do next.");
@@ -61,22 +64,18 @@ class ScaffoldCommand extends Command
         return $suggestions;
     }
 
-    private function detectFileCount($path) {
-        $iterator = new \FilesystemIterator($path, \FilesystemIterator::SKIP_DOTS);
-        $count = 1;
-        foreach ($iterator as $fileInfo) {
-            if ($fileInfo->getExtension() === 'php') {
-                $count++;
-            }
+    private function createTestDir($path) {
+        $testDir = $path . DIRECTORY_SEPARATOR . "tests" . DIRECTORY_SEPARATOR;
+        if (!file_exists($testDir)) {
+            mkdir($testDir);
         }
-        if ($count < 10) {
-            $count = "0" . $count;
-        }
-
-        return "" . $count;
+        return $testDir;
     }
 
-    private function createProviderTemplate($companyName, $nameIncrement) {
+    private function createProviderTemplate($path, $companyName) {
+        $nameIncrement = count(scandir($path)) - 1;
+        $nameIncrement = $nameIncrement < 10 ? "0".$nameIncrement : $nameIncrement;
+
         $content = file_get_contents(implode(DIRECTORY_SEPARATOR, [
             __DIR__,
             'templates',
@@ -99,26 +98,19 @@ class ScaffoldCommand extends Command
         ]), $content);
     }
 
-    private function createRequestTemplate($companyName, $nameIncrement) {
-        $this->writeFile( implode(DIRECTORY_SEPARATOR, [
-            self::ROOT_PROVIDER_PATH,
-            $companyName,
-            "{$companyName}_{$nameIncrement}_test_request.json"
-        ]), "{}");
+    private function createRequestTemplate($path, $nameIncrement) {
+        $this->writeFile($path . "{$nameIncrement}_request.json", "{}");
     }
 
-    private function createParsedResultTemplate($companyName, $nameIncrement) {
-        $this->writeFile( implode(DIRECTORY_SEPARATOR, [
-            self::ROOT_PROVIDER_PATH,
-            $companyName,
-            "{$companyName}_{$nameIncrement}_parsed_results.json"
-        ]), json_encode([
+    private function createParsedResultTemplate($path, $companyName, $nameIncrement) {
+        $this->writeFile($path . "{$nameIncrement}_results.json", json_encode([
             "createdAt" => "",
             "title" => "",
             "parserType" => $companyName,
-            "parserVersion" => $nameIncrement,
+            "parserVersion" => "0",
             "link" => null,
-        ], JSON_PRETTY_PRINT));
+            ], JSON_PRETTY_PRINT)
+        );
     }
 
     private function writeFile($path, $content) {
