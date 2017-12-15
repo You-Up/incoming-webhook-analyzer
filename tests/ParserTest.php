@@ -8,43 +8,58 @@ class ParserTest extends TestCase
     public function testAll()
     {
         $parserProviders = new ParserProvider(true);
-        $parserProviders->forEachParser(function ($clsWithNameSpace, $parserInfo, $companyName, $parserName) {
-            $this->setName($parserName);
+        $parserProviders->forEachParserProvider(function($companyName, $providerDir) {
+            $testDir = $providerDir . DIRECTORY_SEPARATOR . "tests" . DIRECTORY_SEPARATOR;
+            $counter = 1;
+            $cStr = "";
+            print $testDir.PHP_EOL;
+            while(true) {
+                if ($counter < 10) {
+                    $cStr = "0" . $counter;
+                }
 
-            // Load the saved value
-            $testRequest = file_get_contents($parserInfo->getPath() . DIRECTORY_SEPARATOR . $parserName . '_test_request.json');
-            $testRequest = json_decode($testRequest, true);
+                if (!file_exists($testDir . $cStr . "_request.json")) {
+                    break;
+                }
+                $counter++;
 
-            $testResults = file_get_contents($parserInfo->getPath() . DIRECTORY_SEPARATOR . $parserName . '_parsed_results.json');
-            $testResults = json_decode($testResults, true);
+                $this->setName($companyName . "_" . $cStr);
 
-            $fakeRequest = new \Illuminate\Http\Request(
-                $testRequest['get'],
-                $testRequest['post'],
-                [],
-                [],
-                [],
-                $testRequest['server']
-            );
+                $testRequest = file_get_contents($testDir . $cStr . '_request.json');
+                $testRequest = json_decode($testRequest, true);
 
-            $parsedIncident = WebhookParser\Main::run($fakeRequest);
-            $this->assertInstanceOf(\WebhookParser\WebhookIncident::class, $parsedIncident);
+                $testResults = file_get_contents($testDir . $cStr . '_results.json');
+                $testResults = json_decode($testResults, true);
 
-            $jsonIncident = $parsedIncident->jsonSerialize();
+                $fakeRequest = new \Illuminate\Http\Request(
+                    $testRequest['get'],
+                    $testRequest['post'],
+                    [],
+                    [],
+                    [],
+                    $testRequest['server']
+                );
 
-            $jsonIncidentKeys = array_keys($jsonIncident);
-            $testResultsKeys  = array_keys($testResults);
+                $parsedIncident = WebhookParser\Main::run($fakeRequest);
+                $this->assertInstanceOf(\WebhookParser\WebhookIncident::class, $parsedIncident);
 
-            foreach($jsonIncidentKeys as $key) {
-                $this->assertArrayHasKey($key, $testResults, "Parsed value has an extra key '$key' ");
-            }
+                $jsonIncident = $parsedIncident->jsonSerialize();
 
-            foreach($testResultsKeys as $key) {
-                $this->assertArrayHasKey($key, $jsonIncident, "Test parsed value has an extra key '$key' ");
-            }
+                $jsonIncidentKeys = array_keys($jsonIncident);
+                $testResultsKeys  = array_keys($testResults);
 
-            foreach ($jsonIncidentKeys as $key) {
-                $this->assertEquals($testResults[$key], $jsonIncident[$key]);
+                foreach($jsonIncidentKeys as $key) {
+                    $this->assertArrayHasKey($key, $testResults, "Parsed value has an extra key '$key' ");
+                }
+
+                foreach($testResultsKeys as $key) {
+                    $this->assertArrayHasKey($key, $jsonIncident, "Test parsed value has an extra key '$key' ");
+                }
+
+                foreach ($jsonIncidentKeys as $key) {
+                    $this->assertEquals($testResults[$key], $jsonIncident[$key]);
+                }
+
             }
         });
     }
