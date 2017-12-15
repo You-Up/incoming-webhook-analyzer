@@ -12,7 +12,6 @@ class ParserTest extends TestCase
             $testDir = $providerDir . DIRECTORY_SEPARATOR . "tests" . DIRECTORY_SEPARATOR;
             $counter = 1;
             $cStr = "";
-            print $testDir.PHP_EOL;
             while(true) {
                 if ($counter < 10) {
                     $cStr = "0" . $counter;

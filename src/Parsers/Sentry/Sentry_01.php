@@ -38,6 +38,7 @@ class Sentry_01 extends Parser
         $incident->setSummary($this->request->post('message'));
 
         $incident->setLink($this->request->post('url'));
+        $incident->setAction(WebhookIncident::ACTION_CREATE);
 
         return $incident;
     }
