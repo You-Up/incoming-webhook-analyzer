@@ -2,7 +2,10 @@
 
 namespace WebhookParser;
 
-class WebhookIncident implements \JsonSerializable{
+class WebhookIncident implements \JsonSerializable {
+    const ACTION_CREATE = "CREATE";
+    const ACTION_RESOLVE = "RESOLVE";
+
     /**
      * @var null|\DateTime
      */
@@ -21,6 +24,9 @@ class WebhookIncident implements \JsonSerializable{
 
     /** @var string */
     private $link = null;
+
+    /** @var string */
+    private $action = null;
 
     /**
      * @return \DateTime|null
@@ -77,6 +83,18 @@ class WebhookIncident implements \JsonSerializable{
         $this->link = $value;
     }
 
+    public function action()
+    {
+        return $this->action;
+    }
+
+    public function setAction($value)
+    {
+        if (!in_array($value, [self::ACTION_CREATE, self::ACTION_RESOLVE])) {
+            throw new \UnexpectedValueException();
+        }
+        $this->action = $value;
+    }
 
     /**
      * @return bool
@@ -91,6 +109,7 @@ class WebhookIncident implements \JsonSerializable{
     public function jsonSerialize()
     {
         return [
+            'action' => $this->action,
             'createdAt' => $this->createdAt->format('Y-m-d H:i:s'),
             'summary' => $this->summary,
             'parserType' => $this->parserType,

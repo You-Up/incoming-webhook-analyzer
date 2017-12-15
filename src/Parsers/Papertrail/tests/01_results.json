@@ -1,4 +1,5 @@
 {
+  "action": "CREATE",
   "createdAt": "2017-11-10 16:11:11",
   "summary": "papertrail alert triggered \"production.ALERT\"",
   "parserType": "Papertrail",

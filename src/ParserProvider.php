@@ -27,11 +27,15 @@ class ParserProvider {
                 continue;
             }
 
+            $companyName = $rootItem->getBasename();
+            if ($companyName === ".DS_Store") {
+                continue;
+            }
+
             if (!$rootItem->isDir()) {
                 print "Error " . $rootItem->getPathname() . " is not a directory" . PHP_EOL;
                 continue;
             }
-            $companyName = $rootItem->getBasename();
             $providerDir = $this->rootPath . DIRECTORY_SEPARATOR .  $companyName;
             $callback($companyName, $providerDir);
         }

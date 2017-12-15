@@ -38,7 +38,7 @@ class Papertrail_01 extends Parser
         $incident->setSummary("papertrail alert triggered \"{$message}\"");
 
         $incident->setLink($this->payload['saved_search']['html_search_url']);
-
+        $incident->setAction(WebhookIncident::ACTION_CREATE);
         return $incident;
     }
 }
