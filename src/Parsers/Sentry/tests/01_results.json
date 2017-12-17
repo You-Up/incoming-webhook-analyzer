@@ -1,8 +1,9 @@
 {
     "action": "CREATE",
     "createdAt": "2017-11-23 18:50:53",
-    "summary": "This is an example Python exception",
+    "externalId": "409210467",
+    "link": "https://sentry.io/thomas-genin/youup-dev/issues/409210467/",
     "parserType": "Sentry",
     "parserVersion": "01",
-    "link": "https://sentry.io/thomas-genin/youup-dev/issues/409210467/"
+    "summary": "This is an example Python exception"
 }
