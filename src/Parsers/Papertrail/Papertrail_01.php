@@ -1,9 +1,12 @@
 <?php
 /**
  * @date 2017-11-10
+ *
  * @see https://help.papertrailapp.com/kb/how-it-works/web-hooks
+ *
  * @author Thomas Genin
  */
+
 namespace WebhookParser\Parsers\Papertrail;
 
 use WebhookParser\WebhookIncident;
@@ -18,12 +21,13 @@ class Papertrail_01 extends Parser
         if (!$this->request->has('payload')) {
             return false;
         }
-        $this->payload = json_decode( $this->request->post( 'payload' ), true );
+        $this->payload = json_decode($this->request->post('payload'), true);
 
         $needle = 'https://papertrailapp.com/searches/2';
+
         return array_key_exists('saved_search', $this->payload) &&
             array_key_exists('html_edit_url', $this->payload['saved_search']) &&
-            substr($this->payload['saved_search']['html_edit_url'],0, strlen($needle)) === $needle;
+            substr($this->payload['saved_search']['html_edit_url'], 0, strlen($needle)) === $needle;
     }
 
     public function extract()
@@ -39,6 +43,7 @@ class Papertrail_01 extends Parser
 
         $incident->setLink($this->payload['saved_search']['html_search_url']);
         $incident->setAction(WebhookIncident::ACTION_CREATE);
+
         return $incident;
     }
 }

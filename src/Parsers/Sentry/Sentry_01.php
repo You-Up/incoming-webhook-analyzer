@@ -1,8 +1,10 @@
 <?php
 /**
  * @date 2017-11-23
+ *
  * @see LINK_TO_DOCS
  */
+
 namespace WebhookParser\Parsers\Sentry;
 
 use WebhookParser\WebhookIncident;
@@ -11,7 +13,7 @@ use WebhookParser\Parser;
 class Sentry_01 extends Parser
 {
     /**
-     * Detect if an incoming webhook should be process by this class
+     * Detect if an incoming webhook should be process by this class.
      *
      * @return bool
      */
@@ -19,11 +21,11 @@ class Sentry_01 extends Parser
     {
         $userAgent = $this->request->userAgent();
 
-        return substr($userAgent, 0, 6) === 'sentry' && str_contains($userAgent, 'sentry.io');
+        return 'sentry' === substr($userAgent, 0, 6) && str_contains($userAgent, 'sentry.io');
     }
 
     /**
-     * Extract and format the information from the request into a WebhookIncident
+     * Extract and format the information from the request into a WebhookIncident.
      *
      * @return \WebhookParser\WebhookIncident
      */
