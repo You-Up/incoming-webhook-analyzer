@@ -98,6 +98,7 @@ class WebhookIncident implements \JsonSerializable {
         }
         $this->action = $value;
     }
+<<<<<<< HEAD
 
     public function externalId()
     {
@@ -108,6 +109,8 @@ class WebhookIncident implements \JsonSerializable {
     {
         return $this->externalId = $value;
     }
+=======
+>>>>>>> a81665121b1926cfa893a3823eb6f8048763da54
 
     /**
      * @return bool
