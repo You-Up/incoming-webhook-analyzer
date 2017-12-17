@@ -28,6 +28,9 @@ class WebhookIncident implements \JsonSerializable {
     /** @var string */
     private $action = null;
 
+    /** @var string */
+    private $externalId = null;
+
     /**
      * @return \DateTime|null
      */
@@ -38,6 +41,20 @@ class WebhookIncident implements \JsonSerializable {
     public function setCreatedAt(\DateTime $time) {
         $this->createdAt = $time;
         $this->createdAt->setTimeZone(new \DateTimeZone('UTC'));
+    }
+
+    /**
+     * @return string
+     */
+    public function externalId() {
+        return $this->externalId;
+    }
+
+    /**
+     * @param {string} $value
+     */
+    public function setExternalId($value) {
+        $this->externalId = $value;
     }
 
     /**
@@ -111,10 +128,11 @@ class WebhookIncident implements \JsonSerializable {
         return [
             'action' => $this->action,
             'createdAt' => $this->createdAt->format('Y-m-d H:i:s'),
-            'summary' => $this->summary,
+            "externalId" => $this->externalId,
+            'link' => $this->link,
             'parserType' => $this->parserType,
             'parserVersion' => $this->parserVersion,
-            'link' => $this->link
+            'summary' => $this->summary,
         ];
     }
 }
