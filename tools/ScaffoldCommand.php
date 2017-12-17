@@ -104,12 +104,13 @@ class ScaffoldCommand extends Command
 
     private function createParsedResultTemplate($path, $companyName, $nameIncrement) {
         $this->writeFile($path . "{$nameIncrement}_results.json", json_encode([
+            "action" => "wrong",
             "createdAt" => "",
             "externalId" => "@",
-            "summary" => "",
+            "link" => null,
             "parserType" => $companyName,
             "parserVersion" => "0",
-            "link" => null,
+            "summary" => "",
             ], JSON_PRETTY_PRINT)
         );
     }
