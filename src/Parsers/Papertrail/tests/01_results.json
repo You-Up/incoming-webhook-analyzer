@@ -1,6 +1,7 @@
 {
   "action": "CREATE",
   "createdAt": "2017-11-10 16:11:11",
+  "externalId": "",
   "summary": "papertrail alert triggered \"production.ALERT\"",
   "parserType": "Papertrail",
   "parserVersion": "01",

@@ -28,6 +28,9 @@ class WebhookIncident implements \JsonSerializable {
     /** @var string */
     private $action = null;
 
+    /** @var null @var string */
+    private $externalId = null;
+
     /**
      * @return \DateTime|null
      */
@@ -96,6 +99,16 @@ class WebhookIncident implements \JsonSerializable {
         $this->action = $value;
     }
 
+    public function externalId()
+    {
+        return $this->externalId;
+    }
+
+    public function setExternalId($value)
+    {
+        return $this->externalId = $value;
+    }
+
     /**
      * @return bool
      */
@@ -114,7 +127,8 @@ class WebhookIncident implements \JsonSerializable {
             'summary' => $this->summary,
             'parserType' => $this->parserType,
             'parserVersion' => $this->parserVersion,
-            'link' => $this->link
+            'link' => $this->link,
+            'externalId' => $this->externalId,
         ];
     }
 }

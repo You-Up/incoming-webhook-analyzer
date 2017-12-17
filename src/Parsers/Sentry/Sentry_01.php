@@ -34,9 +34,8 @@ class Sentry_01 extends Parser
         $date = new \DateTime();
         $date->setTimestamp($this->request->post('event')['received']);
         $incident->setCreatedAt($date);
-
         $incident->setSummary($this->request->post('message'));
-
+        $incident->setExternalId($this->request->post('id'));
         $incident->setLink($this->request->post('url'));
         $incident->setAction(WebhookIncident::ACTION_CREATE);
 

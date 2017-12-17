@@ -1,6 +1,7 @@
 {
     "action": "CREATE",
     "createdAt": "2017-11-23 18:50:53",
+    "externalId": "409210467",
     "summary": "This is an example Python exception",
     "parserType": "Sentry",
     "parserVersion": "01",
