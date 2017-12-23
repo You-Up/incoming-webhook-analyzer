@@ -2,9 +2,10 @@
 
 namespace WebhookParser;
 
-class WebhookIncident implements \JsonSerializable {
-    const ACTION_CREATE = "CREATE";
-    const ACTION_RESOLVE = "RESOLVE";
+class WebhookIncident implements \JsonSerializable
+{
+    const ACTION_CREATE = 'CREATE';
+    const ACTION_RESOLVE = 'RESOLVE';
 
     /**
      * @var null|\DateTime
@@ -34,11 +35,13 @@ class WebhookIncident implements \JsonSerializable {
     /**
      * @return \DateTime|null
      */
-    public function createdAt() {
+    public function createdAt()
+    {
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTime $time) {
+    public function setCreatedAt(\DateTime $time)
+    {
         $this->createdAt = $time;
         $this->createdAt->setTimeZone(new \DateTimeZone('UTC'));
     }
@@ -46,32 +49,37 @@ class WebhookIncident implements \JsonSerializable {
     /**
      * @return string
      */
-    public function externalId() {
+    public function externalId()
+    {
         return $this->externalId;
     }
 
     /**
      * @param {string} $value
      */
-    public function setExternalId($value) {
+    public function setExternalId($value)
+    {
         $this->externalId = $value;
     }
 
     /**
      * @return string
      */
-    public function parserVersion() {
+    public function parserVersion()
+    {
         return $this->parserVersion;
     }
 
     /**
      * @return string
      */
-    public function parserType() {
+    public function parserType()
+    {
         return $this->parserType;
     }
 
-    public function setParser($company, $version) {
+    public function setParser($company, $version)
+    {
         $this->parserType = $company;
         $this->parserVersion = $version;
     }
@@ -87,16 +95,18 @@ class WebhookIncident implements \JsonSerializable {
     /**
      * @param string $summary
      */
-    public function setSummary( $summary )
+    public function setSummary($summary)
     {
         $this->summary = $summary;
     }
 
-    public function link() {
+    public function link()
+    {
         return $this->link;
     }
 
-    public function setLink($value) {
+    public function setLink($value)
+    {
         $this->link = $value;
     }
 
@@ -118,8 +128,8 @@ class WebhookIncident implements \JsonSerializable {
      */
     public function isValid()
     {
-        return  $this->summary !== null &&
-                $this->createdAt !== null
+        return  null !== $this->summary &&
+                null !== $this->createdAt
             ;
     }
 
@@ -128,7 +138,7 @@ class WebhookIncident implements \JsonSerializable {
         return [
             'action' => $this->action,
             'createdAt' => $this->createdAt->format('Y-m-d H:i:s'),
-            "externalId" => $this->externalId,
+            'externalId' => $this->externalId,
             'link' => $this->link,
             'parserType' => $this->parserType,
             'parserVersion' => $this->parserVersion,

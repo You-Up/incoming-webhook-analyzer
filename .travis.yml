@@ -1,6 +1,5 @@
 language: php
 php:
-  - '7.1'
   - '7.2'
 
 
@@ -16,4 +15,6 @@ before_install:
 install:
   - travis_retry composer update --prefer-dist --no-interaction --prefer-stable --no-suggest
 
-script: vendor/bin/phpunit
+script:
+  - vendor/bin/phpunit
+  - vendor/bin/php-cs-fixer fix --config=.php_cs.dist -v --dry-run --using-cache=no "${EXTRA_ARGS[@]}"
