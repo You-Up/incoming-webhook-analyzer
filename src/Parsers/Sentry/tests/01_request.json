@@ -373,11 +373,7 @@
     }
   },
   "server": {
-    "CONTENT_LENGTH": "8057",
-    "CONTENT_TYPE": "application\/json",
-    "HTTP_ACCEPT": "*\/*",
-    "HTTP_ACCEPT_ENCODING": "gzip, deflate",
-    "HTTP_USER_AGENT": "sentry\/8.23.0.dev0 (https:\/\/sentry.io)",
-    "REQUEST_METHOD": "POST"
+    "REQUEST_METHOD": "POST",
+    "HTTP_USER_AGENT": "sentry\/8.23.0.dev0 (https:\/\/sentry.io)"
   }
 }

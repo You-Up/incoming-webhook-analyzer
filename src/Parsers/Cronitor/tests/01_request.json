@@ -1,0 +1,14 @@
+{
+  "get": {},
+  "post": {
+    "description": "has received a /fail ping. Recent ping history:\n/fail - 2017-12-17 16:19:42 UTC - No message provided\n/run - 2017-12-17 16:19:38 UTC - No message provided\n/complete - 2017-12-17 16:19:30 UTC - No message provided",
+    "monitor": "MyStuff",
+    "rule": "has_failed",
+    "id": "0COINw"
+  },
+  "server": {
+    "REQUEST_METHOD": "POST",
+    "HTTP_USER_AGENT": "python-requests\/2.12.3",
+    "REQUEST_TIME": 1510331536
+  }
+}

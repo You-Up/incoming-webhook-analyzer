@@ -19,7 +19,12 @@ class ParsersTest extends TestCase
             $testRequest['server']
         );
 
-        $parsedIncident = WebhookParser\Main::run($fakeRequest);
+        $parsedIncident = WebhookParser\Main::run($fakeRequest, function($e) {
+            print "Exception while running tests" . PHP_EOL;
+            print "Error " . $e->getMessage();
+            print $e->getTraceAsString();
+        });
+
         $this->assertInstanceOf(\WebhookParser\WebhookIncident::class, $parsedIncident);
 
         $jsonIncident = $parsedIncident->jsonSerialize();
