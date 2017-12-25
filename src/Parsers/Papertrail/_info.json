@@ -1,0 +1,12 @@
+{
+  "name": "Papertrail",
+  "homepage_url": "https://papertrailapp.com",
+  "description": "Frustration-free log management. Seamlessly manage logs from apps, servers, and cloud services.",
+  "documentation_url": "https://help.papertrailapp.com",
+  "favicon": "https://papertrailapp.com/favicon.ico",
+  "icon_svg_url": "https://cdn.worldvectorlogo.com/logos/papertrail-2.svg",
+  "feature": {
+      "create": true,
+      "close": false
+  }
+}

@@ -40,6 +40,10 @@ class ScaffoldCommand extends Command
         $path = self::ROOT_PROVIDER_PATH . DIRECTORY_SEPARATOR . $companyName;
         if (!in_array($companyName, $suggestions)) {
             mkdir($path);
+            copy(
+                implode(DIRECTORY_SEPARATOR, [__DIR__, 'templates', '_info.json']),
+                $path.DIRECTORY_SEPARATOR .'_info.json'
+            );
         }
 
         $this->createProviderTemplate($path, $companyName);

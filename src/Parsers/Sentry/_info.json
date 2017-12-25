@@ -1,0 +1,12 @@
+{
+  "name": "Sentry",
+  "homepage_url": "https://sentry.io",
+  "description": "Open-source error tracking that helps developers monitor and fix crashes in real time. Iterate continuously. Boost workflow efficiency. Improve user experience.",
+  "documentation_url": "https://docs.sentry.io",
+  "icon_svg_url": "https://sentry-brand.storage.googleapis.com/sentry-logo-black.svg",
+  "favicon": "https://e90d271df3e973c7.global.ssl.fastly.net/_static/0edfaf8bfdd8e5c50557e62e2e91ea68/sentry/images/favicon.ico",
+  "feature": {
+    "create": true,
+    "close": false
+  }
+}

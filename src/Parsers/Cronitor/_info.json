@@ -1,0 +1,12 @@
+{
+  "name": "Cronitor",
+  "homepage_url": "https://cronitor.io/",
+  "description": "Monitor cron jobs, micro-services, daemons and almost anything else, no setup required. Easier cron troubleshooting and no more silent failures.",
+  "favicon": "https://cronitor.io/static/img/favicon.png",
+  "documentation_url": "https://cronitor.io/docs/third-party-integrations",
+  "icon_svg_url": null,
+  "feature": {
+    "create": true,
+    "close": true
+  }
+}
